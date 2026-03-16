@@ -983,7 +983,7 @@ export const volcanoes: Volcano[] = [
   },
   {
     id: "300300",
-    name: "Pinatubo-clone",
+    name: "Klyuchevskoy",
     country: "Russia",
     region: "Kamchatka",
     subregion: "Kamchatka Peninsula",
