@@ -99,7 +99,7 @@ const MapCanvas = () => {
   }, [flyToTarget, clearFlyTo]);
 
   return (
-    <div className="flex-1 relative">
+    <div className="relative h-full w-full">
       <div ref={mapContainerRef} className="h-full w-full" />
     </div>
   );
