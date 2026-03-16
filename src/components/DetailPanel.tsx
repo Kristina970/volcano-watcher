@@ -135,10 +135,10 @@ const DetailPanel = () => {
   return (
     <>
       {/* Backdrop */}
-      <div className="absolute inset-0 z-10" onClick={close} />
+      <div className="absolute inset-0" style={{ zIndex: 1000 }} onClick={close} />
 
       {/* Panel */}
-      <div className="absolute top-4 right-4 z-20 w-[400px] max-h-[calc(100%-32px)] bg-card rounded-xl shadow-panel border border-border overflow-hidden animate-slide-in flex flex-col">
+      <div className="absolute top-4 right-4 w-[400px] max-h-[calc(100%-32px)] bg-card rounded-xl shadow-panel border border-border overflow-hidden animate-slide-in flex flex-col" style={{ zIndex: 1001 }}>
         {/* Content */}
         <div className="flex-1 overflow-y-auto custom-scrollbar">
           {/* Wiki image */}
