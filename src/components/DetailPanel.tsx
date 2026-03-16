@@ -1,6 +1,7 @@
 import { useEffect, useCallback } from "react";
-import { X, ExternalLink } from "lucide-react";
+import { X, ExternalLink, Skull, Users, Home, DollarSign, Mountain, Wind, Flame, AlertTriangle } from "lucide-react";
 import { useVolcanoStore } from "@/store/volcanoStore";
+import type { LastEruptionDetail } from "@/data/volcanoes";
 
 const statusBadge: Record<string, string> = {
   active: "bg-volcano-active text-primary-foreground",
@@ -16,6 +17,64 @@ function VEIBar({ vei, maxVei = 8 }: { vei: number; maxVei?: number }) {
         className="h-full rounded-full bg-primary transition-all"
         style={{ width: `${pct}%` }}
       />
+    </div>
+  );
+}
+
+function OutcomeStat({ icon: Icon, label, value }: { icon: React.ElementType; label: string; value: string }) {
+  return (
+    <div className="flex items-center gap-2 text-sm">
+      <Icon className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+      <span className="text-muted-foreground">{label}:</span>
+      <span className="font-medium text-foreground">{value}</span>
+    </div>
+  );
+}
+
+function LastEruptionSection({ detail }: { detail: LastEruptionDetail }) {
+  const o = detail.outcomes;
+  const hasStats = o.deaths != null || o.injuries != null || o.evacuated != null || o.homes_destroyed != null || o.damages_usd != null || o.area_affected_km2 != null || o.ash_column_km != null || o.lava_flow_km != null;
+
+  return (
+    <div>
+      <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Last Eruption Details</h3>
+
+      <div className="grid grid-cols-2 gap-2 text-sm mb-3">
+        <div>
+          <span className="text-muted-foreground text-xs block">Date</span>
+          <span className="font-medium text-foreground">{detail.date}</span>
+        </div>
+        {detail.duration && (
+          <div>
+            <span className="text-muted-foreground text-xs block">Duration</span>
+            <span className="font-medium text-foreground">{detail.duration}</span>
+          </div>
+        )}
+      </div>
+
+      {hasStats && (
+        <div className="bg-muted/50 rounded-lg p-3 space-y-1.5 mb-3">
+          {o.deaths != null && <OutcomeStat icon={Skull} label="Deaths" value={o.deaths.toLocaleString()} />}
+          {o.injuries != null && <OutcomeStat icon={AlertTriangle} label="Injuries" value={o.injuries.toLocaleString()} />}
+          {o.evacuated != null && <OutcomeStat icon={Users} label="Evacuated" value={o.evacuated.toLocaleString()} />}
+          {o.homes_destroyed != null && <OutcomeStat icon={Home} label="Homes destroyed" value={o.homes_destroyed.toLocaleString()} />}
+          {o.damages_usd != null && <OutcomeStat icon={DollarSign} label="Damages" value={o.damages_usd} />}
+          {o.area_affected_km2 != null && <OutcomeStat icon={Mountain} label="Area affected" value={`${o.area_affected_km2.toLocaleString()} km²`} />}
+          {o.ash_column_km != null && <OutcomeStat icon={Wind} label="Ash column" value={`${o.ash_column_km} km`} />}
+          {o.lava_flow_km != null && <OutcomeStat icon={Flame} label="Lava flow" value={`${o.lava_flow_km} km`} />}
+        </div>
+      )}
+
+      {o.additional.length > 0 && (
+        <ul className="space-y-1">
+          {o.additional.map((note, i) => (
+            <li key={i} className="text-xs text-muted-foreground leading-relaxed flex gap-2">
+              <span className="text-accent shrink-0 mt-0.5">›</span>
+              <span>{note}</span>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
@@ -78,13 +137,16 @@ const DetailPanel = () => {
             </div>
             <div>
               <span className="text-muted-foreground text-xs block">Last Eruption</span>
-              <span className="font-medium text-foreground">{v.last_eruption_year ?? "Unknown"}</span>
+              <span className="font-medium text-foreground">{v.last_eruption?.date ?? v.last_eruption_year ?? "Unknown"}</span>
             </div>
             <div>
               <span className="text-muted-foreground text-xs block">GVP Number</span>
               <span className="font-medium text-foreground">{v.gvp_number}</span>
             </div>
           </div>
+
+          {/* Last Eruption Details */}
+          {v.last_eruption && <LastEruptionSection detail={v.last_eruption} />}
 
           {/* History */}
           {v.history_text && (
