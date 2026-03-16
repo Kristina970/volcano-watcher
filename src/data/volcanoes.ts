@@ -1006,8 +1006,7 @@ export const volcanoes: Volcano[] = [
       "Located in the Kamchatka Volcanoes UNESCO World Heritage Site.",
     ],
     gvp_number: "300300",
-    name: "Klyuchevskoy",
-  } as any,
+  },
   {
     id: "261140",
     name: "Semeru",
