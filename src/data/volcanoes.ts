@@ -1,3 +1,19 @@
+export interface LastEruptionDetail {
+  date: string;
+  duration: string | null;
+  outcomes: {
+    deaths: number | null;
+    injuries: number | null;
+    evacuated: number | null;
+    homes_destroyed: number | null;
+    damages_usd: string | null;
+    area_affected_km2: number | null;
+    ash_column_km: number | null;
+    lava_flow_km: number | null;
+    additional: string[];
+  };
+}
+
 export interface Volcano {
   id: string;
   name: string;
@@ -10,6 +26,7 @@ export interface Volcano {
   type: string;
   status: "active" | "dormant" | "extinct";
   last_eruption_year: number | null;
+  last_eruption: LastEruptionDetail | null;
   vei_max: number | null;
   eruption_history: { year: number; vei: number }[];
   history_text: string | null;
@@ -30,6 +47,21 @@ export const volcanoes: Volcano[] = [
     type: "Shield",
     status: "active",
     last_eruption_year: 2024,
+    last_eruption: {
+      date: "June 3, 2024",
+      duration: "2 weeks",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 0,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 2,
+        ash_column_km: null,
+        lava_flow_km: 1.5,
+        additional: ["Lava fountaining at Halemaʻumaʻu crater", "Summit lava lake re-formed", "No infrastructure threatened"],
+      },
+    },
     vei_max: 5,
     eruption_history: [
       { year: 2024, vei: 1 },
@@ -58,6 +90,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 2024,
+    last_eruption: {
+      date: "August 14, 2024",
+      duration: "3 days",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 0,
+        homes_destroyed: 0,
+        damages_usd: "$4 million",
+        area_affected_km2: 5,
+        ash_column_km: 9,
+        lava_flow_km: 3,
+        additional: ["Catania airport closed for 48 hours", "Ash fall on nearby towns", "Lava fountains reaching 1,500 m from Southeast Crater"],
+      },
+    },
     vei_max: 3,
     eruption_history: [
       { year: 2024, vei: 2 },
@@ -86,6 +133,21 @@ export const volcanoes: Volcano[] = [
     type: "Caldera",
     status: "active",
     last_eruption_year: 2023,
+    last_eruption: {
+      date: "October 15, 2023",
+      duration: "1 week",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 1200,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 10,
+        ash_column_km: 3,
+        lava_flow_km: null,
+        additional: ["Exclusion zone extended to 5 km radius", "Fishing communities temporarily relocated", "Alert level raised to Level III (Siaga)"],
+      },
+    },
     vei_max: 6,
     eruption_history: [
       { year: 2023, vei: 2 },
@@ -112,6 +174,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 1707,
+    last_eruption: {
+      date: "December 16, 1707",
+      duration: "16 days",
+      outcomes: {
+        deaths: 0,
+        injuries: null,
+        evacuated: null,
+        homes_destroyed: 72,
+        damages_usd: null,
+        area_affected_km2: 1200,
+        ash_column_km: 20,
+        lava_flow_km: null,
+        additional: ["Ashfall reached Edo (modern Tokyo), 100 km away", "3 new volcanic vents opened on the southeast flank", "Farmland buried under ash causing famine in surrounding villages"],
+      },
+    },
     vei_max: 5,
     eruption_history: [
       { year: 1707, vei: 5 },
@@ -138,6 +215,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 1991,
+    last_eruption: {
+      date: "June 15, 1991",
+      duration: "9 hours (climactic phase); months of activity",
+      outcomes: {
+        deaths: 847,
+        injuries: 184,
+        evacuated: 200000,
+        homes_destroyed: 8000,
+        damages_usd: "$700 million",
+        area_affected_km2: 2000,
+        ash_column_km: 34,
+        lava_flow_km: null,
+        additional: ["Clark Air Base and Subic Bay Naval Station permanently closed", "Coincided with Typhoon Yunya, causing heavy wet ashfall and roof collapses", "Global temperatures dropped 0.5°C for a year", "Lahars continued to devastate villages for years after"],
+      },
+    },
     vei_max: 6,
     eruption_history: [
       { year: 1991, vei: 6 },
@@ -162,6 +254,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 1944,
+    last_eruption: {
+      date: "March 18, 1944",
+      duration: "2 weeks",
+      outcomes: {
+        deaths: 26,
+        injuries: 12000,
+        evacuated: 12000,
+        homes_destroyed: 900,
+        damages_usd: null,
+        area_affected_km2: 30,
+        ash_column_km: 6,
+        lava_flow_km: 5,
+        additional: ["Destroyed the villages of San Sebastiano and Massa di Somma", "88 B-25 bombers of the US Army Air Forces destroyed at Pompeii Airfield", "Last eruption of Vesuvius to date"],
+      },
+    },
     vei_max: 5,
     eruption_history: [
       { year: 1944, vei: 3 },
@@ -189,6 +296,21 @@ export const volcanoes: Volcano[] = [
     type: "Shield",
     status: "active",
     last_eruption_year: 2022,
+    last_eruption: {
+      date: "November 27, 2022",
+      duration: "13 days",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 0,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 36,
+        ash_column_km: null,
+        lava_flow_km: 19,
+        additional: ["Lava flow came within 2.8 km of Daniel K. Inouye Highway (Saddle Road)", "First eruption in 38 years, ending longest quiet period since 1843", "No structures or roads damaged"],
+      },
+    },
     vei_max: 4,
     eruption_history: [
       { year: 2022, vei: 0 },
@@ -216,6 +338,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 2024,
+    last_eruption: {
+      date: "July 11, 2024",
+      duration: "Ongoing (persistent activity)",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 70,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 2,
+        ash_column_km: 2,
+        lava_flow_km: 0.8,
+        additional: ["Pyroclastic flow reached the sea on the Sciara del Fuoco", "Tourists and hikers briefly evacuated from upper slopes", "Alert level raised to Orange"],
+      },
+    },
     vei_max: 3,
     eruption_history: [
       { year: 2024, vei: 2 },
@@ -243,6 +380,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 2024,
+    last_eruption: {
+      date: "January 18, 2024",
+      duration: "Intermittent (ongoing dome growth)",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 2000,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 7,
+        ash_column_km: 3,
+        lava_flow_km: null,
+        additional: ["Pyroclastic flows traveled 3 km down southwestern flanks", "Lava dome collapse generated hot avalanche clouds", "7 km exclusion zone enforced around summit"],
+      },
+    },
     vei_max: 4,
     eruption_history: [
       { year: 2024, vei: 2 },
@@ -270,6 +422,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 2008,
+    last_eruption: {
+      date: "January 2008",
+      duration: "4 years (dome-building phase 2004–2008)",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 0,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 1,
+        ash_column_km: null,
+        lava_flow_km: null,
+        additional: ["Slow dome growth added ~125 million cubic meters of lava", "No explosive activity — entirely effusive", "1980 eruption killed 57 people and destroyed 250 homes, 47 bridges, and 300 km of road"],
+      },
+    },
     vei_max: 5,
     eruption_history: [
       { year: 2008, vei: 2 },
@@ -296,6 +463,21 @@ export const volcanoes: Volcano[] = [
     type: "Caldera",
     status: "dormant",
     last_eruption_year: null,
+    last_eruption: {
+      date: "~640,000 years ago",
+      duration: "Unknown (possibly weeks to months)",
+      outcomes: {
+        deaths: null,
+        injuries: null,
+        evacuated: null,
+        homes_destroyed: null,
+        damages_usd: null,
+        area_affected_km2: 17000,
+        ash_column_km: 40,
+        lava_flow_km: null,
+        additional: ["Ejected over 1,000 cubic km of material", "Blanketed much of North America in ash up to 2 m thick", "Created the current 72×55 km caldera"],
+      },
+    },
     vei_max: 8,
     eruption_history: [],
     history_text: "Yellowstone is one of the world's largest active volcanic systems, with three massive caldera-forming eruptions in the last 2.1 million years. The last major eruption, 640,000 years ago, ejected over 1,000 cubic kilometers of material.",
@@ -318,6 +500,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 2024,
+    last_eruption: {
+      date: "September 5, 2024",
+      duration: "Hours (single explosive event)",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 0,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 8,
+        ash_column_km: 5,
+        lava_flow_km: null,
+        additional: ["Ash drifted over Kagoshima city affecting 600,000 residents", "One of thousands of annual explosions", "Car windshields and crops coated with volcanic ash"],
+      },
+    },
     vei_max: 4,
     eruption_history: [
       { year: 2024, vei: 2 },
@@ -346,6 +543,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 1967,
+    last_eruption: {
+      date: "1967",
+      duration: "Several weeks",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 0,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 2,
+        ash_column_km: null,
+        lava_flow_km: null,
+        additional: ["Minor phreatic eruption", "1815 eruption (VEI 7) killed 71,000+ people and caused the 'Year Without a Summer'", "1815 event reduced the volcano's height from ~4,300 m to 2,850 m"],
+      },
+    },
     vei_max: 7,
     eruption_history: [
       { year: 1967, vei: 0 },
@@ -371,6 +583,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 2010,
+    last_eruption: {
+      date: "March 20, 2010",
+      duration: "3 months (March – June 2010)",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 800,
+        homes_destroyed: 0,
+        damages_usd: "$1.7 billion (airline losses)",
+        area_affected_km2: 250,
+        ash_column_km: 9,
+        lava_flow_km: 3,
+        additional: ["~100,000 flights cancelled over 6 days across Europe", "10 million travelers stranded worldwide", "Jökulhlaup (glacial flood) damaged farmland in Þórsmörk valley", "No fatalities or structural destruction on the ground"],
+      },
+    },
     vei_max: 4,
     eruption_history: [
       { year: 2010, vei: 4 },
@@ -396,6 +623,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 2024,
+    last_eruption: {
+      date: "May 21, 2024",
+      duration: "Ongoing (intermittent explosions)",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 3000,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 40,
+        ash_column_km: 8,
+        lava_flow_km: null,
+        additional: ["Ashfall on Puebla and surrounding towns", "Puebla and Mexico City airports briefly closed", "Schools suspended in 4 municipalities", "12 km exclusion zone enforced"],
+      },
+    },
     vei_max: 5,
     eruption_history: [
       { year: 2024, vei: 2 },
@@ -423,6 +665,21 @@ export const volcanoes: Volcano[] = [
     type: "Shield",
     status: "active",
     last_eruption_year: 2024,
+    last_eruption: {
+      date: "August 18, 2024",
+      duration: "5 days",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 0,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 3,
+        ash_column_km: null,
+        lava_flow_km: 2,
+        additional: ["Eruption confined within the Enclos Fouqué caldera", "Lava fountains up to 50 m high", "Hiking trails in the caldera closed to the public"],
+      },
+    },
     vei_max: 2,
     eruption_history: [
       { year: 2024, vei: 1 },
@@ -451,6 +708,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "dormant",
     last_eruption_year: 1894,
+    last_eruption: {
+      date: "November 1894",
+      duration: "Weeks (minor steam and ash)",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: null,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 5,
+        ash_column_km: 1,
+        lava_flow_km: null,
+        additional: ["Small phreatic (steam) explosions", "Minor ash deposits on upper flanks", "No settlements affected — area was sparsely populated"],
+      },
+    },
     vei_max: 4,
     eruption_history: [
       { year: 1894, vei: 1 },
@@ -476,6 +748,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 2023,
+    last_eruption: {
+      date: "October 21, 2023",
+      duration: "Ongoing (low-level activity since late 2022)",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 5000,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 20,
+        ash_column_km: 2,
+        lava_flow_km: null,
+        additional: ["Ashfall on agricultural areas south of Quito", "Glacier melting raised lahar concerns for downstream valleys", "Exclusion zone of 5 km around the crater"],
+      },
+    },
     vei_max: 4,
     eruption_history: [
       { year: 2023, vei: 2 },
@@ -502,6 +789,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 2024,
+    last_eruption: {
+      date: "March 2024",
+      duration: "Ongoing (intermittent effusive activity)",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 0,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 1,
+        ash_column_km: null,
+        lava_flow_km: 0.5,
+        additional: ["Unique natrocarbonatite lava flows observed at ~500°C", "No communities in direct danger due to remote location", "Maasai herders temporarily relocated cattle from upper slopes"],
+      },
+    },
     vei_max: 3,
     eruption_history: [
       { year: 2024, vei: 1 },
@@ -528,6 +830,21 @@ export const volcanoes: Volcano[] = [
     type: "Caldera",
     status: "active",
     last_eruption_year: 2024,
+    last_eruption: {
+      date: "February 14, 2024",
+      duration: "Hours (single phreatic event)",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 500,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 5,
+        ash_column_km: 3.5,
+        lava_flow_km: null,
+        additional: ["Ash drifted over nearby towns of Aso and Takamori", "Tourist access to Nakadake crater restricted", "Alert level raised to Level 3 (do not approach volcano)"],
+      },
+    },
     vei_max: 4,
     eruption_history: [
       { year: 2024, vei: 2 },
@@ -555,6 +872,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 2010,
+    last_eruption: {
+      date: "October 2010",
+      duration: "42 years (continuous eruption 1968–2010)",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 0,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 5,
+        ash_column_km: null,
+        lava_flow_km: 2,
+        additional: ["Volcano entered a resting phase in October 2010", "1968 initial eruption killed 87 people and destroyed the town of Tabacón", "Now a major hot springs tourism destination"],
+      },
+    },
     vei_max: 3,
     eruption_history: [
       { year: 2010, vei: 2 },
@@ -580,6 +912,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 2000,
+    last_eruption: {
+      date: "February 26, 2000",
+      duration: "12 days",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 0,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 18,
+        ash_column_km: 12,
+        lava_flow_km: 7,
+        additional: ["Eruption began with only 79 minutes warning on seismographs", "Two lava flows descended the northern slopes", "Minor fluorine contamination in grazing lands — livestock briefly relocated"],
+      },
+    },
     vei_max: 5,
     eruption_history: [
       { year: 2000, vei: 3 },
@@ -608,6 +955,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 2021,
+    last_eruption: {
+      date: "May 22, 2021",
+      duration: "6 hours (lava flow phase)",
+      outcomes: {
+        deaths: 32,
+        injuries: 40,
+        evacuated: 400000,
+        homes_destroyed: 3500,
+        damages_usd: "$25 million",
+        area_affected_km2: 25,
+        ash_column_km: null,
+        lava_flow_km: 12,
+        additional: ["Lava flowed into the suburbs of Goma, a city of 2 million", "17 villages destroyed or severely damaged", "Power plant destroyed, leaving much of Goma without electricity", "Aftershock earthquakes continued for weeks, damaging additional buildings"],
+      },
+    },
     vei_max: 1,
     eruption_history: [
       { year: 2021, vei: 1 },
@@ -634,6 +996,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 2024,
+    last_eruption: {
+      date: "2024 (continuous activity)",
+      duration: "Ongoing since 1972",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: null,
+        homes_destroyed: null,
+        damages_usd: null,
+        area_affected_km2: null,
+        ash_column_km: null,
+        lava_flow_km: null,
+        additional: ["Persistent lava lake with Strombolian explosions", "No human settlements at risk", "Studied continuously by the Mount Erebus Volcano Observatory"],
+      },
+    },
     vei_max: 3,
     eruption_history: [
       { year: 2024, vei: 1 },
@@ -660,6 +1037,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 1995,
+    last_eruption: {
+      date: "February 1995",
+      duration: "5 years (eruption phase 1991–1995)",
+      outcomes: {
+        deaths: 43,
+        injuries: 12,
+        evacuated: 12000,
+        homes_destroyed: 2511,
+        damages_usd: "$3.2 billion",
+        area_affected_km2: 35,
+        ash_column_km: 12,
+        lava_flow_km: null,
+        additional: ["43 killed including volcanologists Maurice & Katia Krafft and Harry Glicken on June 3, 1991", "Pyroclastic flows traveled up to 5.5 km from the dome", "Shimabara city severely damaged by lahars during rainy seasons", "Heisei-Shinzan lava dome grew to 1,483 m during the eruption"],
+      },
+    },
     vei_max: 4,
     eruption_history: [
       { year: 1995, vei: 2 },
@@ -686,6 +1078,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "dormant",
     last_eruption_year: 1909,
+    last_eruption: {
+      date: "November 18, 1909",
+      duration: "10 days",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 150,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 5,
+        ash_column_km: null,
+        lava_flow_km: 3,
+        additional: ["Flank eruption at Chinyero vent (not the summit)", "Lava flows threatened but did not reach the village of Santiago del Teide", "Most recent eruption on Tenerife island"],
+      },
+    },
     vei_max: 4,
     eruption_history: [
       { year: 1909, vei: 2 },
@@ -711,6 +1118,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 2024,
+    last_eruption: {
+      date: "February 5, 2024",
+      duration: "Hours (Strombolian phase)",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 1500,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 10,
+        ash_column_km: 3,
+        lava_flow_km: 1,
+        additional: ["Lava fountains reached 200 m from the crater", "Pucón and surrounding towns placed on alert", "Ski resort and tourism facilities temporarily closed"],
+      },
+    },
     vei_max: 3,
     eruption_history: [
       { year: 2024, vei: 1 },
@@ -738,6 +1160,21 @@ export const volcanoes: Volcano[] = [
     type: "Caldera",
     status: "active",
     last_eruption_year: 2024,
+    last_eruption: {
+      date: "April 2024",
+      duration: "Ongoing (persistent Strombolian activity via Sakurajima)",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 0,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 5,
+        ash_column_km: 3,
+        lava_flow_km: null,
+        additional: ["Explosive events at Minamidake and Showa craters", "Volcanic ash regularly drifts over Kagoshima city", "Part of ongoing eruptive cycle at Sakurajima"],
+      },
+    },
     vei_max: 7,
     eruption_history: [
       { year: 2024, vei: 1 },
@@ -763,6 +1200,21 @@ export const volcanoes: Volcano[] = [
     type: "Subglacial",
     status: "active",
     last_eruption_year: 1918,
+    last_eruption: {
+      date: "October 12, 1918",
+      duration: "24 days",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: null,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 600,
+        ash_column_km: 14,
+        lava_flow_km: null,
+        additional: ["Massive jökulhlaup (glacial flood) extended Iceland's coastline by 5 km at Kötlutangi", "Flood discharge rivaled that of the Amazon River briefly", "Farmland inundated with volcanic sediment and ice blocks"],
+      },
+    },
     vei_max: 5,
     eruption_history: [
       { year: 1918, vei: 4 },
@@ -789,6 +1241,21 @@ export const volcanoes: Volcano[] = [
     type: "Caldera",
     status: "active",
     last_eruption_year: 2022,
+    last_eruption: {
+      date: "March 26, 2022",
+      duration: "Minutes (phreatomagmatic explosion)",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 6000,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 15,
+        ash_column_km: 3,
+        lava_flow_km: null,
+        additional: ["Short-lived but intense explosion from the main crater", "The larger 2020 eruption evacuated 376,000 people and damaged 5,500 homes", "Taal Lake fishing communities repeatedly displaced"],
+      },
+    },
     vei_max: 4,
     eruption_history: [
       { year: 2022, vei: 1 },
@@ -816,6 +1283,21 @@ export const volcanoes: Volcano[] = [
     type: "Shield",
     status: "active",
     last_eruption_year: 2024,
+    last_eruption: {
+      date: "January 2024",
+      duration: "Ongoing (persistent lava lake)",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 0,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 2,
+        ash_column_km: null,
+        lava_flow_km: 1,
+        additional: ["Lava lake overflow on the southern flank", "No settlements in immediate danger — extremely remote location", "2017 eruption displaced several Afar communities and killed 2 livestock herders"],
+      },
+    },
     vei_max: 2,
     eruption_history: [
       { year: 2024, vei: 1 },
@@ -842,6 +1324,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "dormant",
     last_eruption_year: 1869,
+    last_eruption: {
+      date: "1869",
+      duration: "Several weeks",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: null,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 10,
+        ash_column_km: null,
+        lava_flow_km: 6,
+        additional: ["Lava flows descended the northeastern flanks", "No settlements directly affected due to sparse population", "Charles Darwin observed a previous eruption in 1835 during his Beagle voyage"],
+      },
+    },
     vei_max: 2,
     eruption_history: [
       { year: 1869, vei: 2 },
@@ -867,6 +1364,21 @@ export const volcanoes: Volcano[] = [
     type: "Submarine",
     status: "extinct",
     last_eruption_year: 1967,
+    last_eruption: {
+      date: "June 5, 1967",
+      duration: "3.5 years (November 1963 – June 1967)",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: null,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 2.7,
+        ash_column_km: 10,
+        lava_flow_km: null,
+        additional: ["Created a brand-new island of 2.7 km² from the Atlantic Ocean floor", "Island has since eroded to about 1.3 km²", "Became a unique natural laboratory for ecological succession studies"],
+      },
+    },
     vei_max: 3,
     eruption_history: [
       { year: 1967, vei: 3 },
@@ -892,6 +1404,21 @@ export const volcanoes: Volcano[] = [
     type: "Shield",
     status: "active",
     last_eruption_year: 2007,
+    last_eruption: {
+      date: "January 13, 2007",
+      duration: "2 days",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 40000,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 20,
+        ash_column_km: 6,
+        lava_flow_km: 2,
+        additional: ["Ashfall contaminated water supplies for Moroni (capital)", "Lava filled the summit caldera lake", "2005 eruption similarly displaced thousands and caused respiratory health issues"],
+      },
+    },
     vei_max: 2,
     eruption_history: [
       { year: 2007, vei: 1 },
@@ -918,6 +1445,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "dormant",
     last_eruption_year: 1250,
+    last_eruption: {
+      date: "~1250 CE",
+      duration: "Unknown (likely weeks to months)",
+      outcomes: {
+        deaths: null,
+        injuries: null,
+        evacuated: null,
+        homes_destroyed: null,
+        damages_usd: null,
+        area_affected_km2: 30,
+        ash_column_km: null,
+        lava_flow_km: 8,
+        additional: ["Eruption produced a large pyroclastic flow and lahar", "Deposits found 20 km from the summit in the Shasta River valley", "Pre-European-contact — oral histories from the Shasta and Wintu peoples reference the event"],
+      },
+    },
     vei_max: 4,
     eruption_history: [
       { year: 1250, vei: 4 },
@@ -942,6 +1484,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 2024,
+    last_eruption: {
+      date: "March 30, 2024",
+      duration: "Ongoing (elevated activity since 2023)",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 8000,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 15,
+        ash_column_km: 5,
+        lava_flow_km: null,
+        additional: ["Ashfall on Manizales and surrounding towns", "Lahar warning systems on high alert due to glacier melt risk", "1985 eruption generated lahars that killed ~23,000 in Armero — Colombia's worst disaster"],
+      },
+    },
     vei_max: 3,
     eruption_history: [
       { year: 2024, vei: 2 },
@@ -968,6 +1525,21 @@ export const volcanoes: Volcano[] = [
     type: "Caldera",
     status: "dormant",
     last_eruption_year: 1950,
+    last_eruption: {
+      date: "January 10, 1950",
+      duration: "3 months",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 0,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 1,
+        ash_column_km: null,
+        lava_flow_km: 0.5,
+        additional: ["Small lava dome extrusion at Nea Kameni island", "No settlements affected — eruption confined to uninhabited islet", "The ~1600 BC Minoan eruption (VEI 7) destroyed the Minoan civilization and may have inspired the Atlantis legend"],
+      },
+    },
     vei_max: 7,
     eruption_history: [
       { year: 1950, vei: 2 },
@@ -993,6 +1565,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 2024,
+    last_eruption: {
+      date: "October 12, 2024",
+      duration: "Weeks (Strombolian and Vulcanian phases)",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 0,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 30,
+        ash_column_km: 10,
+        lava_flow_km: 5,
+        additional: ["Ash plumes disrupted Pacific aviation routes", "Lava flows descended the Apakhonchich funnel on the southeastern flank", "No population at risk — nearest settlement is Klyuchi, 30 km away"],
+      },
+    },
     vei_max: 5,
     eruption_history: [
       { year: 2024, vei: 3 },
@@ -1019,6 +1606,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 2024,
+    last_eruption: {
+      date: "December 4, 2024",
+      duration: "Ongoing (near-continuous since 1967)",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 2000,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 12,
+        ash_column_km: 6,
+        lava_flow_km: null,
+        additional: ["Pyroclastic flows traveled 4 km down the Besuk Kobokan drainage", "December 2021 eruption killed 51 people and destroyed over 5,000 buildings", "11 km exclusion zone enforced on the southeastern flank"],
+      },
+    },
     vei_max: 4,
     eruption_history: [
       { year: 2024, vei: 2 },
@@ -1045,6 +1647,21 @@ export const volcanoes: Volcano[] = [
     type: "Stratovolcano",
     status: "active",
     last_eruption_year: 2024,
+    last_eruption: {
+      date: "June 18, 2024",
+      duration: "Hours (single Vulcanian explosion)",
+      outcomes: {
+        deaths: 0,
+        injuries: 0,
+        evacuated: 50,
+        homes_destroyed: 0,
+        damages_usd: null,
+        area_affected_km2: 3,
+        ash_column_km: 4,
+        lava_flow_km: null,
+        additional: ["Large volcanic blocks ejected 600 m from the crater", "Residents of Toshima village (pop. ~50) briefly sheltered indoors", "Part of long-running intermittent Strombolian activity since 1949"],
+      },
+    },
     vei_max: 4,
     eruption_history: [
       { year: 2024, vei: 2 },
@@ -1060,4 +1677,3 @@ export const volcanoes: Volcano[] = [
     gvp_number: "300350",
   },
 ];
-
