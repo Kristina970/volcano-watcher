@@ -1061,30 +1061,3 @@ export const volcanoes: Volcano[] = [
   },
 ];
 
-// Fix the Klyuchevskoy entry
-volcanoes[volcanoes.length - 3] = {
-  id: "300300",
-  name: "Klyuchevskoy",
-  country: "Russia",
-  region: "Kamchatka",
-  subregion: "Kamchatka Peninsula",
-  lat: 56.056,
-  lng: 160.643,
-  elevation_m: 4750,
-  type: "Stratovolcano",
-  status: "active",
-  last_eruption_year: 2024,
-  vei_max: 5,
-  eruption_history: [
-    { year: 2024, vei: 3 },
-    { year: 2023, vei: 3 },
-    { year: 2019, vei: 3 },
-  ],
-  history_text: "Klyuchevskoy is the highest active volcano in Eurasia and one of the most active volcanoes in the world. It erupts almost every year, producing spectacular ash columns and lava flows.",
-  facts: [
-    "Highest active volcano in Eurasia at 4,750 m.",
-    "Has erupted over 50 times since 1700.",
-    "Located in the Kamchatka Volcanoes UNESCO World Heritage Site.",
-  ],
-  gvp_number: "300300",
-};
