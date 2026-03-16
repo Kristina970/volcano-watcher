@@ -1,3 +1,19 @@
+export interface LastEruptionDetail {
+  date: string;          // e.g. "June 3, 2024" or "March 1707"
+  duration: string | null; // e.g. "2 months", "Ongoing"
+  outcomes: {
+    deaths: number | null;
+    injuries: number | null;
+    evacuated: number | null;
+    homes_destroyed: number | null;
+    damages_usd: string | null;   // e.g. "$800 million"
+    area_affected_km2: number | null;
+    ash_column_km: number | null;
+    lava_flow_km: number | null;
+    additional: string[];         // extra outcome notes
+  };
+}
+
 export interface Volcano {
   id: string;
   name: string;
@@ -10,6 +26,7 @@ export interface Volcano {
   type: string;
   status: "active" | "dormant" | "extinct";
   last_eruption_year: number | null;
+  last_eruption: LastEruptionDetail | null;
   vei_max: number | null;
   eruption_history: { year: number; vei: number }[];
   history_text: string | null;
