@@ -75,14 +75,16 @@ const MapCanvas = () => {
     }).addTo(map);
 
     volcanoes.forEach((v) => {
+      const recent = isRecentlyErupted(v);
       const marker = L.marker([v.lat, v.lng], {
-        icon: createTriangleIcon(v.status),
+        icon: createTriangleIcon(v.status, false, recent),
       }).addTo(map);
 
+      const tooltipLabel = recent ? "🔴 Recently erupted!" : "";
       marker.bindTooltip(
         `${v.name} · ${v.region}, ${v.country}${
           v.last_eruption_year ? `<br/>Last eruption: ${v.last_eruption_year}` : ""
-        }`,
+        }${tooltipLabel ? `<br/><b>${tooltipLabel}</b>` : ""}`,
         {
           direction: "top",
           className: "volcano-tooltip",
@@ -91,8 +93,8 @@ const MapCanvas = () => {
       );
 
       marker.on("click", () => setSelectedVolcano(v));
-      marker.on("mouseover", () => marker.setIcon(createTriangleIcon(v.status, true)));
-      marker.on("mouseout", () => marker.setIcon(createTriangleIcon(v.status)));
+      marker.on("mouseover", () => marker.setIcon(createTriangleIcon(v.status, true, recent)));
+      marker.on("mouseout", () => marker.setIcon(createTriangleIcon(v.status, false, recent)));
     });
 
     mapRef.current = map;
