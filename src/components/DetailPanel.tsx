@@ -181,7 +181,8 @@ const DetailPanel = () => {
                 <h2 className="text-xl font-bold text-foreground truncate">{v.name}</h2>
                 <p className="text-sm text-muted-foreground mt-0.5">{v.region}, {v.country}</p>
               </div>
-              <div className="flex items-center gap-2 ml-3">
+              <div className="flex items-center gap-1 ml-3">
+                <SpeakButton name={v.name} region={v.region} country={v.country} />
                 <span className={`text-xs px-2 py-1 rounded-full font-medium capitalize ${statusBadge[v.status]}`}>
                   {v.status}
                 </span>
