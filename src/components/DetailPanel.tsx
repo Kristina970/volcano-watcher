@@ -1,5 +1,5 @@
 import { useEffect, useCallback, useState } from "react";
-import { X, ExternalLink, Skull, Users, Home, DollarSign, Mountain, Wind, Flame, AlertTriangle } from "lucide-react";
+import { X, ExternalLink, Skull, Users, Home, DollarSign, Mountain, Wind, Flame, AlertTriangle, Volume2 } from "lucide-react";
 import { useVolcanoStore } from "@/store/volcanoStore";
 import type { LastEruptionDetail } from "@/data/volcanoes";
 import { getWikiData, type WikiData } from "@/lib/wikiService";
@@ -95,6 +95,36 @@ function WikiImage({ url, name }: { url: string; name: string }) {
   );
 }
 
+function SpeakButton({ name, region, country }: { name: string; region: string; country: string }) {
+  const [speaking, setSpeaking] = useState(false);
+
+  const speak = () => {
+    if (speaking) {
+      window.speechSynthesis.cancel();
+      setSpeaking(false);
+      return;
+    }
+    const text = `This is ${name}. It is a volcano in ${region}, ${country}.`;
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 0.85;
+    utterance.pitch = 1.1;
+    utterance.onend = () => setSpeaking(false);
+    utterance.onerror = () => setSpeaking(false);
+    setSpeaking(true);
+    window.speechSynthesis.speak(utterance);
+  };
+
+  return (
+    <button
+      onClick={speak}
+      className={`p-1.5 rounded-full transition-colors ${speaking ? "bg-primary text-primary-foreground" : "hover:bg-muted text-muted-foreground hover:text-foreground"}`}
+      title="Hear volcano name"
+    >
+      <Volume2 className="h-4 w-4" />
+    </button>
+  );
+}
+
 const DetailPanel = () => {
   const { selectedVolcano, setSelectedVolcano } = useVolcanoStore();
   const [wiki, setWiki] = useState<WikiData | null>(null);
@@ -151,7 +181,8 @@ const DetailPanel = () => {
                 <h2 className="text-xl font-bold text-foreground truncate">{v.name}</h2>
                 <p className="text-sm text-muted-foreground mt-0.5">{v.region}, {v.country}</p>
               </div>
-              <div className="flex items-center gap-2 ml-3">
+              <div className="flex items-center gap-1 ml-3">
+                <SpeakButton name={v.name} region={v.region} country={v.country} />
                 <span className={`text-xs px-2 py-1 rounded-full font-medium capitalize ${statusBadge[v.status]}`}>
                   {v.status}
                 </span>

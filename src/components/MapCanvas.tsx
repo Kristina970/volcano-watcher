@@ -4,7 +4,14 @@ import "leaflet/dist/leaflet.css";
 import { volcanoes, type Volcano } from "@/data/volcanoes";
 import { useVolcanoStore } from "@/store/volcanoStore";
 
-function createTriangleIcon(status: Volcano["status"], hover = false) {
+const RECENT_ERUPTION_YEARS = 5;
+
+function isRecentlyErupted(v: Volcano): boolean {
+  const currentYear = new Date().getFullYear();
+  return v.status === "active" && v.last_eruption_year != null && (currentYear - v.last_eruption_year) <= RECENT_ERUPTION_YEARS;
+}
+
+function createTriangleIcon(status: Volcano["status"], hover = false, recentlyErupted = false) {
   const colors = {
     active: { fill: "#E8453C", stroke: "#C33A32" },
     dormant: { fill: "#3D3D3A", stroke: "#2A2A28" },
@@ -19,17 +26,25 @@ function createTriangleIcon(status: Volcano["status"], hover = false) {
 
   const size = sizes[status];
   const { fill, stroke } = colors[status];
+  const outer = recentlyErupted ? size + 16 : size;
+  const offset = recentlyErupted ? 8 : 0;
 
-  const svg = `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="${size / 2},0 ${size},${size} 0,${size}" fill="${fill}" stroke="${stroke}" stroke-width="1" stroke-linejoin="round"/>
+  const glowRing = recentlyErupted
+    ? `<circle cx="${outer / 2}" cy="${outer / 2}" r="${outer / 2 - 2}" fill="none" stroke="${fill}" stroke-width="2" class="eruption-pulse-ring" opacity="0.6"/>
+       <circle cx="${outer / 2}" cy="${outer / 2}" r="${outer / 2 - 5}" fill="${fill}" fill-opacity="0.12"/>`
+    : "";
+
+  const svg = `<svg width="${outer}" height="${outer}" viewBox="0 0 ${outer} ${outer}" xmlns="http://www.w3.org/2000/svg">
+    ${glowRing}
+    <polygon points="${outer / 2},${offset} ${outer / 2 + size / 2},${offset + size} ${outer / 2 - size / 2},${offset + size}" fill="${fill}" stroke="${stroke}" stroke-width="1" stroke-linejoin="round"/>
   </svg>`;
 
   return L.divIcon({
     html: svg,
-    className: "volcano-marker",
-    iconSize: [size, size],
-    iconAnchor: [size / 2, size],
-    tooltipAnchor: [0, -size],
+    className: `volcano-marker${recentlyErupted ? " erupting" : ""}`,
+    iconSize: [outer, outer],
+    iconAnchor: [outer / 2, offset + size],
+    tooltipAnchor: [0, -(offset + size)],
   });
 }
 
@@ -60,14 +75,16 @@ const MapCanvas = () => {
     }).addTo(map);
 
     volcanoes.forEach((v) => {
+      const recent = isRecentlyErupted(v);
       const marker = L.marker([v.lat, v.lng], {
-        icon: createTriangleIcon(v.status),
+        icon: createTriangleIcon(v.status, false, recent),
       }).addTo(map);
 
+      const tooltipLabel = recent ? "🔴 Recently erupted!" : "";
       marker.bindTooltip(
         `${v.name} · ${v.region}, ${v.country}${
           v.last_eruption_year ? `<br/>Last eruption: ${v.last_eruption_year}` : ""
-        }`,
+        }${tooltipLabel ? `<br/><b>${tooltipLabel}</b>` : ""}`,
         {
           direction: "top",
           className: "volcano-tooltip",
@@ -76,8 +93,8 @@ const MapCanvas = () => {
       );
 
       marker.on("click", () => setSelectedVolcano(v));
-      marker.on("mouseover", () => marker.setIcon(createTriangleIcon(v.status, true)));
-      marker.on("mouseout", () => marker.setIcon(createTriangleIcon(v.status)));
+      marker.on("mouseover", () => marker.setIcon(createTriangleIcon(v.status, true, recent)));
+      marker.on("mouseout", () => marker.setIcon(createTriangleIcon(v.status, false, recent)));
     });
 
     mapRef.current = map;
