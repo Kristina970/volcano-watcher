@@ -126,6 +126,7 @@ function SpeakButton({ name, region, country }: { name: string; region: string; 
 }
 
 const DetailPanel = () => {
+  const { selectedVolcano, setSelectedVolcano } = useVolcanoStore();
   const [wiki, setWiki] = useState<WikiData | null>(null);
   const [wikiLoading, setWikiLoading] = useState(false);
 
