@@ -1,5 +1,5 @@
 import { useEffect, useCallback, useState } from "react";
-import { X, ExternalLink, Skull, Users, Home, DollarSign, Mountain, Wind, Flame, AlertTriangle } from "lucide-react";
+import { X, ExternalLink, Skull, Users, Home, DollarSign, Mountain, Wind, Flame, AlertTriangle, Volume2 } from "lucide-react";
 import { useVolcanoStore } from "@/store/volcanoStore";
 import type { LastEruptionDetail } from "@/data/volcanoes";
 import { getWikiData, type WikiData } from "@/lib/wikiService";
