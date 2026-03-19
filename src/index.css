@@ -145,6 +145,23 @@
   animation: pulse-live 2s ease-in-out infinite;
 }
 
+/* Eruption pulse ring on map markers */
+@keyframes eruption-pulse {
+  0%   { opacity: 0.7; transform: scale(1); }
+  50%  { opacity: 0.25; transform: scale(1.35); }
+  100% { opacity: 0.7; transform: scale(1); }
+}
+
+.volcano-marker.erupting svg .eruption-pulse-ring {
+  animation: eruption-pulse 2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.volcano-marker.erupting {
+  animation: eruption-pulse 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 6px hsla(5, 76%, 55%, 0.5));
+}
+
 /* Scrollbar styling */
 .custom-scrollbar::-webkit-scrollbar {
   width: 4px;

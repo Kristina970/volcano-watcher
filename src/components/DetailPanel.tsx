@@ -95,7 +95,37 @@ function WikiImage({ url, name }: { url: string; name: string }) {
   );
 }
 
-const DetailPanel = () => {
+function SpeakButton({ name, region, country }: { name: string; region: string; country: string }) {
+  const [speaking, setSpeaking] = useState(false);
+
+  const speak = () => {
+    if (speaking) {
+      window.speechSynthesis.cancel();
+      setSpeaking(false);
+      return;
+    }
+    const text = `This is ${name}. It is a volcano in ${region}, ${country}.`;
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 0.85;
+    utterance.pitch = 1.1;
+    utterance.onend = () => setSpeaking(false);
+    utterance.onerror = () => setSpeaking(false);
+    setSpeaking(true);
+    window.speechSynthesis.speak(utterance);
+  };
+
+  return (
+    <button
+      onClick={speak}
+      className={`p-1.5 rounded-full transition-colors ${speaking ? "bg-primary text-primary-foreground" : "hover:bg-muted text-muted-foreground hover:text-foreground"}`}
+      title="Hear volcano name"
+    >
+      <Volume2 className="h-4 w-4" />
+    </button>
+  );
+}
+
+
   const { selectedVolcano, setSelectedVolcano } = useVolcanoStore();
   const [wiki, setWiki] = useState<WikiData | null>(null);
   const [wikiLoading, setWikiLoading] = useState(false);
