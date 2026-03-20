@@ -104,8 +104,9 @@ function SpeakButton({ name, region, country }: { name: string; region: string; 
       setSpeaking(false);
       return;
     }
-    const text = `This is ${name}. It is a volcano in ${region}, ${country}.`;
+    const text = `Це ${name}. Це вулкан у регіоні ${region}, країна ${country}.`;
     const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "uk-UA";
     utterance.rate = 0.85;
     utterance.pitch = 1.1;
     utterance.onend = () => setSpeaking(false);
